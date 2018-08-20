@@ -10,301 +10,278 @@ light_source {
 	color rgb<1,1,1> 
 }				   
 
-// Whole robot body
+// ===== COLOURED OBJECTS =====
 union {
-    // Top torso section
-    difference {
-    	cylinder {
-    		<-1,6,0>,
-    		<1,6,0>,
-    		1
-    		texture {
-    			pigment { color rgb<1,1,1> }
-    		}
-    	}
-    	
-    	union {
-    		cylinder {
-    			<-1.1,6,0>,
-    			<1,6,0>,
-    			0.9
-    			texture {
-    				pigment { color rgb<1,1,1> }
-    			}
-    		}
-    		
-    		box { 
-    			<-0.5,6,-0.85>, 
-    			<0.5,7,0.85>
-    			texture {
-    				pigment { color rgb<1,1,1> }
-    			} 
-    		}
-    		
-    		box { 
-    			<-1.1,5,-1>, 
-    			<1.1,6,1>
-    			texture {
-    				pigment { color rgb<1,1,1> }
-    			} 
-    		}
-    		
-    		difference {
-    		
-    			cylinder {
-    				<-0.75,6,0>,
-    				<-0.7,6,0>,
-    				1.1
-    				texture {
-    					pigment { color rgb<1,1,1> }
-    				}
-    			}
-    			
-    			cylinder {
-    				<-0.75,6,0>,
-    				<-0.7,6,0>,
-    				0.98
-    				texture {
-    					pigment { color rgb<1,1,1> }
-    				}
-    			}
-    		}
-    		
-    		difference {
-    				
-    			cylinder {
-    				<0.75,6,0>,
-    				<0.7,6,0>,
-    				1.1
-    				texture {
-    					pigment { color rgb<1,1,1> }
-    				}
-    			}
-    			
-    			cylinder {
-    				<0.75,6,0>,
-    				<0.7,6,0>,
-    				0.98
-    				texture {
-    					pigment { color rgb<1,1,1> }
-    				}
-    			}
-    		}
-    	}
-    }
-    
-    // Right shoulder
-    sphere {
-    	<-1,6.5,0>
-    	0.44
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }
-    
-    // Left shoulder
-    sphere {
-    	<1,6.5,0>
-    	0.44
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }
-    
-    // Left upper arm connector
-    box {
-    	<1,4,0.25>
-    	<1.1,6.5,-0.25>
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }
-    
-    // Left upper arm
-    difference {
-    	box {
-    		<0.95,6,0.3>
-    		<1.15,4.75,-0.3>
-    		texture {
-    			pigment { color rgb<1,1,1> }
-    		}
-    	}
-    	
-    	cylinder {
-    		<0.9,4.75,0>
-    		<1.2,4.75,0>
-    		0.45
-    		texture {
-    			pigment { color rgb<1,1,1> }
-    		}
-    	}
-    }
-    
-    // Left elbow
-    cylinder {
-    	<0.95,4.75,0>
-    	<1.15,4.75,0>
-    	0.3
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }
-    
-    // Left lower arm
-    difference {
-    	box {
-    		<0.95,4.75,0.3>
-    		<1.15,3.5,-0.3>
-    		texture {
-    			pigment { color rgb<1,1,1> }
-    		}
-    	}
-    	
-    	cylinder {
-    		<0.9,4.75,0>
-    		<1.2,4.75,0>
-    		0.45
-    		texture {
-    			pigment { color rgb<1,1,1> }
-    		}
-    	}
-    }
-    
-    // Right upper arm
-    /*box {
-    	<-0.95,6,0.4>
-    	<-1.15,4.5,-0.4>
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }*/
-    
-    // Left upper arm connector
-    box {
-    	<-1,4,0.25>
-    	<-1.1,6.5,-0.25>
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }
-    
-    // Left upper arm
-    difference {
-    	box {
-    		<-0.95,6,0.3>
-    		<-1.15,4.75,-0.3>
-    		texture {
-    			pigment { color rgb<1,1,1> }
-    		}
-    	}
-    	
-    	cylinder {
-    		<-0.9,4.75,0>
-    		<-1.2,4.75,0>
-    		0.45
-    		texture {
-    			pigment { color rgb<1,1,1> }
-    		}
-    	}
-    }
-    
-    // Left elbow
-    cylinder {
-    	<-0.95,4.75,0>
-    	<-1.15,4.75,0>
-    	0.3
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }
-    
-    // Left lower arm
-    difference {
-    	box {
-    		<-0.95,4.75,0.3>
-    		<-1.15,3.5,-0.3>
-    		texture {
-    			pigment { color rgb<1,1,1> }
-    		}
-    	}
-    	
-    	cylinder {
-    		<-0.9,4.75,0>
-    		<-1.2,4.75,0>
-    		0.45
-    		texture {
-    			pigment { color rgb<1,1,1> }
-    		}
-    	}
-    }
-    
-    // Upper torso shaft
-    cylinder {
-    	<-1,6.5,0>,
-    	<1,6.5,0>,
-    	0.44
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }
-    
-    // Middle torso section 
-    cylinder {
-    	<0,6.1,0>,
-    	<0,5,0>,
-    	0.75
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }
-    
-    // Lower torso section				 
-    cylinder {
-    	<0,5,0>,
-    	<0,4,0>,
-    	0.6
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }
-    
-    // Undercarriage
-    cylinder {
-    	<-0.2,3.8,0>,
-    	<0.2,3.8,0>,
-    	0.5
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }
-    
-    // Leg shaft
-    cylinder {
-    	<-0.5,3.55,0>,
-    	<0.5,3.55,0>,
-    	0.1
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }
-    
-    // Right leg upper cylinder
-    cylinder {
-    	<-0.7,3.55,0>,
-    	<-0.3,3.55,0>,
-    	0.35
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }
-    
-    // Left leg upper cylinder
-    cylinder {
-    	<0.7,3.55,0>,
-    	<0.3,3.55,0>,
-    	0.35
-    	texture {
-    		pigment { color rgb<1,1,1> }
-    	}
-    }
+	// Top torso section
+	difference {
+		cylinder {
+			<-1,6,0>,
+			<1,6,0>,
+			1
+		}
+		
+		union {
+			cylinder {
+				<-1.1,6,0>,
+				<1.1,6,0>,
+				0.9
+			}
+			
+			box { 
+				<-0.5,6,-0.85>, 
+				<0.5,7,0.85>
+			}
+			
+			box { 
+				<-1.1,5,-1>, 
+				<1.1,6,1>
+			}
+			
+			box {
+				<-0.05, 7, 0>
+				<0.05, 5, -1>
+			}
+			
+			difference {
+			
+				cylinder {
+					<-0.75,6,0>,
+					<-0.7,6,0>,
+					1.1
+				}
+				
+				cylinder {
+					<-0.75,6,0>,
+					<-0.7,6,0>,
+					0.97
+				}
+			}
+			
+			difference {
+					
+				cylinder {
+					<0.75,6,0>,
+					<0.7,6,0>,
+					1.1
+				}
+				
+				cylinder {
+					<0.75,6,0>,
+					<0.7,6,0>,
+					0.97
+				}
+			}
+		}
+	}
+	
+	// Right shoulder
+	sphere {
+		<-1,6.5,0>
+		0.44
+	}
+	
+	// Left shoulder
+	sphere {
+		<1,6.5,0>
+		0.44
+	}
+	
+	// Left upper arm
+	difference {
+		box {
+			<0.95,6,0.3>
+			<1.15,4.75,-0.3>
+		}
+		
+		cylinder {
+			<0.9,4.75,0>
+			<1.2,4.75,0>
+			0.45
+		}
+	}
+	
+	// Left elbow
+	cylinder {
+		<0.95,4.75,0>
+		<1.15,4.75,0>
+		0.3
+	}
+	
+	// Left lower arm
+	difference {
+		box {
+			<0.95,4.75,0.3>
+			<1.15,3.5,-0.3>
+		}
+		
+		cylinder {
+			<0.9,4.75,0>
+			<1.2,4.75,0>
+			0.45
+		}
+	}
+	
+	// Right upper arm
+	difference {
+		box {
+			<-0.95,6,0.3>
+			<-1.15,4.75,-0.3>
+		}
+		
+		cylinder {
+			<-0.9,4.75,0>
+			<-1.2,4.75,0>
+			0.45
+		}
+	}
+	
+	// Right elbow
+	cylinder {
+		<-0.95,4.75,0>
+		<-1.15,4.75,0>
+		0.3
+	}
+	
+	// Right lower arm
+	difference {
+		box {
+			<-0.95,4.75,0.3>
+			<-1.15,3.5,-0.3>
+		}
+		
+		cylinder {
+			<-0.9,4.75,0>
+			<-1.2,4.75,0>
+			0.45
+		}
+	}
+	
+	// Middle torso section 
+	difference
+	{
+		cylinder {
+			<0,6.1,0>,
+			<0,5,0>,
+			0.75
+		}
+		
+		difference {
+			union {
+				box {
+					<-0.5, 6.2, 1>
+					<-0.55, 4.9, -1>
+				}
+				
+				box {
+					<0.5, 6.2, 1>
+					<0.55, 4.9, -1>
+				}
+			}
+			
+			cylinder {
+				<0, 6.2, 0>
+				<0, 4.9, 0>
+				0.7
+			}
+		}
+	}
+	
+	// Middle torso plate
+	intersection {
+		cylinder {
+			<0, 6.1, 0>
+			<0, 5, 0>
+			0.85
+		}
+		
+		box {
+			<0.4, 5.9, 1>
+			<-0.4, 5.2, -1>
+		}
+	}
+	
+	// Lower torso section				 
+	cylinder {
+		<0,5,0>,
+		<0,4,0>,
+		0.6
+	}
+	
+	// Undercarriage
+	cylinder {
+		<-0.2,3.7,0>,
+		<0.2,3.7,0>,
+		0.5
+	}
+	
+	// Right leg upper cylinder
+	cylinder {
+		<-0.7,3.45,0>,
+		<-0.3,3.45,0>,
+		0.4
+	}
+	
+	// Left leg upper cylinder
+	cylinder {
+		<0.7,3.45,0>,
+		<0.3,3.45,0>,
+		0.4
+	}
+	
+	// Left leg upper section
+	difference {
+		box {
+			<0.7,3.45,0.4>
+			<0.3,1.45,-0.4>
+		}
+		
+		cylinder {
+			<0.71,3.45,0>
+			<0.29,3.45,0>
+			0.55
+		}
+	}
+	
+	// Left leg upper struts
+	//box {
+		
+	//}
+	
+	
+	pigment { color rgb<100/255,1,231/255> }
+}
+
+// ===== GREY OBJECTS =====
+
+union {
+	
+	// Upper torso shaft
+	cylinder {
+		<-1,6.5,0>,
+		<1,6.5,0>,
+		0.44
+	} 
+	
+	// Left upper arm connector
+	box {
+		<1,4,0.25>
+		<1.1,6.5,-0.25>
+	}
+	
+	// Right upper arm connector
+	box {
+		<-1,4,0.25>
+		<-1.1,6.5,-0.25>
+	}
+	
+	// Leg shaft
+	cylinder {
+		<-0.5,3.45,0>,
+		<0.5,3.45,0>,
+		0.1
+	}
+	
+	texture {
+		pigment { color rgb<0.2,0.2,0.2> }
+	}
 }

@@ -19,12 +19,12 @@
 ;
 ; Width of image in pixels.  Accepts integer values.
 ;
-Width = 800
+Width = 1000
 ;
 ;
 ; Height of image in pixels.  Accepts integer values.
 ;
-Height = 800
+Height = 1000
 ;
 ; Sets minimum number of objects before auto bounding kicks in.
 ;
@@ -33,16 +33,6 @@ Bounding_Threshold = 3
 ;
 ; USER OPTIONS
 Antialias = true
-;
-;
-; ANIMATION OPTIONS
-;Initial_Frame = 1
-;Final_Frame = 30
-;Initial_Clock = 0
-;Final_Clock = 1
-
-;Cyclic_Animation = on
-;Pause_when_Done = off
 ;
 ;
 ; Turn display on
