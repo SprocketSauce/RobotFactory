@@ -1,3 +1,5 @@
+#declare GreyMetal = texture { pigment { rgb <0.2,0.2,0.2> } };
+
 camera {
 	location <3,6.5,-10>
 	look_at <0,6,0>
@@ -8,7 +10,7 @@ camera {
 light_source { 
 	<1,7,-8> 
 	color rgb<1,1,1> 
-}				   
+}   
 
 // ===== COLOURED OBJECTS =====
 union {
@@ -214,39 +216,74 @@ union {
 		0.5
 	}
 	
-	// Right leg upper cylinder
-	cylinder {
-		<-0.7,3.45,0>,
-		<-0.3,3.45,0>,
-		0.4
-	}
-	
-	// Left leg upper cylinder
-	cylinder {
-		<0.7,3.45,0>,
-		<0.3,3.45,0>,
-		0.4
-	}
-	
-	// Left leg upper section
-	difference {
-		box {
-			<0.7,3.45,0.4>
-			<0.3,1.45,-0.4>
+	#declare leg =
+	union {	
+		// Left leg upper cylinder
+		difference {
+			cylinder {
+				<0.7,3.45,0>,
+				<0.3,3.45,0>,
+				0.4
+			}
+			
+			box {
+				<0.68,3.45,0.4>
+				<0.32,3,-0.4>
+			}
 		}
 		
 		cylinder {
-			<0.71,3.45,0>
-			<0.29,3.45,0>
-			0.55
+			<0.68,3.45,0>
+			<0.32,3.45,0>
+			0.34
+			texture { GreyMetal }
+		}
+		
+		// Left leg upper section
+		difference {
+			box {
+				<0.7,3.45,0.4>
+				<0.3,1.45,-0.4>
+			}
+			
+			cylinder {
+				<0.71,3.45,0>
+				<0.29,3.45,0>
+				0.55
+			}
+			
+			#local strip =
+			box {
+				<0.71,3.5,-0.3>
+				<0.66,1.4,-0.2>
+			}
+			
+			object { strip }
+			object { 
+				strip
+				translate <0,0,0.25>
+			}
+			object { 
+				strip
+				translate <0,0,0.5>
+			}
+		}
+		
+		// Left leg upper struts
+		box {
+			<0.63,3.45,0.3>
+			<0.53,2.5,-0.3>
+			texture { GreyMetal }
+		}
+		
+		box {
+			<0.47,3.45,0.3>
+			<0.37,2.5,-0.3>
+			texture { GreyMetal }
 		}
 	}
 	
-	// Left leg upper struts
-	//box {
-		
-	//}
-	
+	object { leg }
 	
 	pigment { color rgb<100/255,1,231/255> }
 }
