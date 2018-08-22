@@ -1,17 +1,17 @@
-#include "metals.inc"
-
 #declare GreyMetal = texture { pigment { rgb <0.2,0.2,0.2> } };
 
 camera {
 	location <3,6.5,-10>
-	look_at <0,6,0>
+	look_at <0,4,0>
 	up <0,1,0>
 	right<1,0,0>
 }
 
 light_source { 
 	<1,7,-8> 
-	color rgb<1,1,1> 
+	color rgb<1,1,1>
+	//area_light <5, 0, 0> <0, 5, 0> 5 5
+	 
 }   
 
 // ===== COLOURED OBJECTS =====
@@ -220,7 +220,7 @@ union {
 	
 	#declare leg =
 	union {	
-		// Left leg upper cylinder
+		// Upper leg cylinder
 		difference {
 			cylinder {
 				<0.7,3.45,0>,
@@ -241,16 +241,23 @@ union {
 			texture { GreyMetal }
 		}
 		
-		// Left leg upper section
+		// Leg section
+		#local section =
 		difference {
 			box {
 				<0.7,3.45,0.4>
-				<0.3,1.45,-0.4>
+				<0.3,1.95,-0.4>
 			}
 			
 			cylinder {
 				<0.71,3.45,0>
 				<0.29,3.45,0>
+				0.55
+			}
+			
+			cylinder {
+				<0.71,1.95,0>
+				<0.29,1.95,0>
 				0.55
 			}
 			
@@ -271,7 +278,23 @@ union {
 			}
 		}
 		
-		// Left leg upper struts
+		// Upper leg section
+		object { section }
+		
+		// Knee
+		cylinder {
+			<0.7,1.95,0>
+			<0.3,1.95,0>
+			0.4
+		}
+		
+		// Lower leg section
+		object {
+			section
+			translate <0,-1.5,0>
+		}
+		
+		// Upper leg struts
 		box {
 			<0.63,3.45,0.3>
 			<0.53,2.5,-0.3>
@@ -291,8 +314,11 @@ union {
 	    leg
 		scale <-1,0,0>
 	}
-	
-	pigment { color rgb<100/255,1,231/255> }
+
+	texture {
+		pigment { color rgb<100/255,1,231/255> }
+		finish { specular 1 roughness 0.01 }
+	}
 }
 
 // ===== GREY OBJECTS =====
