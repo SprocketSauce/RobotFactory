@@ -1,3 +1,5 @@
+#include "metals.inc"
+
 #declare GreyMetal = texture { pigment { rgb <0.2,0.2,0.2> } };
 
 camera {
@@ -284,6 +286,11 @@ union {
 	}
 	
 	object { leg }
+	
+	object {
+	    leg
+		scale <-1,0,0>
+	}
 	
 	pigment { color rgb<100/255,1,231/255> }
 }
