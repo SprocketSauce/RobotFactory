@@ -90,41 +90,54 @@ union {
 		0.44
 	}
 	
-	// Left upper arm
-	difference {
-		box {
-			<0.95,6,0.3>
-			<1.15,4.75,-0.3>
+	// Arm definition
+	#declare arm =
+	union {
+		// Left upper arm
+		difference {
+			box {
+				<0.95,6,0.3>
+				<1.15,4.75,-0.3>
+			}
+			
+			cylinder {
+				<0.9,4.75,0>
+				<1.2,4.75,0>
+				0.45
+			}
 		}
 		
+		// Left elbow
 		cylinder {
-			<0.9,4.75,0>
-			<1.2,4.75,0>
-			0.45
-		}
-	}
-	
-	// Left elbow
-	cylinder {
-		<0.95,4.75,0>
-		<1.15,4.75,0>
-		0.3
-	}
-	
-	// Left lower arm
-	difference {
-		box {
-			<0.95,4.75,0.3>
-			<1.15,3.5,-0.3>
+			<0.95,4.75,0>
+			<1.15,4.75,0>
+			0.3
 		}
 		
-		cylinder {
-			<0.9,4.75,0>
-			<1.2,4.75,0>
-			0.45
+		// Left lower arm
+		difference {
+			box {
+				<0.95,4.75,0.3>
+				<1.15,3.5,-0.3>
+			}
+			
+			cylinder {
+				<0.9,4.75,0>
+				<1.2,4.75,0>
+				0.45
+			}
 		}
 	}
+
+	// Left arm
+	object { arm }
 	
+	// Right arm
+	object {
+		arm
+		scale <-1,1,1>
+	}
+	/*
 	// Right upper arm
 	difference {
 		box {
@@ -159,7 +172,8 @@ union {
 			0.45
 		}
 	}
-	
+	*/
+
 	// Middle torso section 
 	difference
 	{
@@ -252,13 +266,13 @@ union {
 			cylinder {
 				<0.71,3.45,0>
 				<0.29,3.45,0>
-				0.55
+				0.5
 			}
 			
 			cylinder {
 				<0.71,1.95,0>
 				<0.29,1.95,0>
-				0.55
+				0.5
 			}
 			
 			#local strip =
@@ -293,6 +307,58 @@ union {
 			section
 			translate <0,-1.5,0>
 		}
+
+		// Ankle ball
+		sphere {
+			<0.5,0.45,0>
+			0.2
+		}
+
+		// Foot claw
+		difference {
+			sphere {
+				<0.5,0,0>
+				0.65
+			}
+
+			box {
+				<0.4,1,1>
+				<0.6,-1,-1>
+			}
+
+			box {
+				<1,1,0.1>
+				<-1,-1,-0.1>
+			}
+
+			box {
+				<2,0,2>
+				<-2,-1,-2>
+			}
+
+			box {
+				<0.1,1,1>
+				<-1,-1,-1>
+			}
+
+			box {
+				<0.9,1,1>
+				<2,-1,-1>
+			}
+
+			cylinder {
+				<0.5,1,0>
+				<0.5,-1,0>
+				0.3
+			}
+
+			cylinder
+			{
+				<-1,0,0>
+				<1,0,0>
+				0.2
+			}
+		}
 		
 		// Upper leg struts
 		box {
@@ -306,6 +372,7 @@ union {
 			<0.37,2.5,-0.3>
 			texture { GreyMetal }
 		}
+
 	}
 	
 	object { leg }
