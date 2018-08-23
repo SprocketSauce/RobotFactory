@@ -316,8 +316,8 @@ union {
 	}
 
 	texture {
-		pigment { color rgb<100/255,1,231/255> }
-		finish { specular 1 roughness 0.01 }
+		pigment { color rgb<90/255,230/255,1> }
+		finish { specular 1 roughness 0.007 }
 	}
 }
 
