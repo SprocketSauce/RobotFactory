@@ -2,14 +2,16 @@
 
 camera {
 	location <3,6.5,-10>
-	look_at <0,6,0>
+	look_at <0,4,0>
 	up <0,1,0>
 	right<1,0,0>
 }
 
 light_source { 
 	<1,7,-8> 
-	color rgb<1,1,1> 
+	color rgb<1,1,1>
+	//area_light <5, 0, 0> <0, 5, 0> 5 5
+	 
 }   
 
 // ===== COLOURED OBJECTS =====
@@ -88,41 +90,54 @@ union {
 		0.44
 	}
 	
-	// Left upper arm
-	difference {
-		box {
-			<0.95,6,0.3>
-			<1.15,4.75,-0.3>
+	// Arm definition
+	#declare arm =
+	union {
+		// Left upper arm
+		difference {
+			box {
+				<0.95,6,0.3>
+				<1.15,4.75,-0.3>
+			}
+			
+			cylinder {
+				<0.9,4.75,0>
+				<1.2,4.75,0>
+				0.45
+			}
 		}
 		
+		// Left elbow
 		cylinder {
-			<0.9,4.75,0>
-			<1.2,4.75,0>
-			0.45
-		}
-	}
-	
-	// Left elbow
-	cylinder {
-		<0.95,4.75,0>
-		<1.15,4.75,0>
-		0.3
-	}
-	
-	// Left lower arm
-	difference {
-		box {
-			<0.95,4.75,0.3>
-			<1.15,3.5,-0.3>
+			<0.95,4.75,0>
+			<1.15,4.75,0>
+			0.3
 		}
 		
-		cylinder {
-			<0.9,4.75,0>
-			<1.2,4.75,0>
-			0.45
+		// Left lower arm
+		difference {
+			box {
+				<0.95,4.75,0.3>
+				<1.15,3.5,-0.3>
+			}
+			
+			cylinder {
+				<0.9,4.75,0>
+				<1.2,4.75,0>
+				0.45
+			}
 		}
 	}
+
+	// Left arm
+	object { arm }
 	
+	// Right arm
+	object {
+		arm
+		scale <-1,1,1>
+	}
+	/*
 	// Right upper arm
 	difference {
 		box {
@@ -157,7 +172,8 @@ union {
 			0.45
 		}
 	}
-	
+	*/
+
 	// Middle torso section 
 	difference
 	{
@@ -218,7 +234,7 @@ union {
 	
 	#declare leg =
 	union {	
-		// Left leg upper cylinder
+		// Upper leg cylinder
 		difference {
 			cylinder {
 				<0.7,3.45,0>,
@@ -239,17 +255,24 @@ union {
 			texture { GreyMetal }
 		}
 		
-		// Left leg upper section
+		// Leg section
+		#local section =
 		difference {
 			box {
 				<0.7,3.45,0.4>
-				<0.3,1.45,-0.4>
+				<0.3,1.95,-0.4>
 			}
 			
 			cylinder {
 				<0.71,3.45,0>
 				<0.29,3.45,0>
-				0.55
+				0.5
+			}
+			
+			cylinder {
+				<0.71,1.95,0>
+				<0.29,1.95,0>
+				0.5
 			}
 			
 			#local strip =
@@ -269,7 +292,75 @@ union {
 			}
 		}
 		
-		// Left leg upper struts
+		// Upper leg section
+		object { section }
+		
+		// Knee
+		cylinder {
+			<0.7,1.95,0>
+			<0.3,1.95,0>
+			0.4
+		}
+		
+		// Lower leg section
+		object {
+			section
+			translate <0,-1.5,0>
+		}
+
+		// Ankle ball
+		sphere {
+			<0.5,0.45,0>
+			0.2
+		}
+
+		// Foot claw
+		difference {
+			sphere {
+				<0.5,0,0>
+				0.65
+			}
+
+			box {
+				<0.4,1,1>
+				<0.6,-1,-1>
+			}
+
+			box {
+				<1,1,0.1>
+				<-1,-1,-0.1>
+			}
+
+			box {
+				<2,0,2>
+				<-2,-1,-2>
+			}
+
+			box {
+				<0.1,1,1>
+				<-1,-1,-1>
+			}
+
+			box {
+				<0.9,1,1>
+				<2,-1,-1>
+			}
+
+			cylinder {
+				<0.5,1,0>
+				<0.5,-1,0>
+				0.3
+			}
+
+			cylinder
+			{
+				<-1,0,0>
+				<1,0,0>
+				0.2
+			}
+		}
+		
+		// Upper leg struts
 		box {
 			<0.63,3.45,0.3>
 			<0.53,2.5,-0.3>
@@ -281,11 +372,20 @@ union {
 			<0.37,2.5,-0.3>
 			texture { GreyMetal }
 		}
+
 	}
 	
 	object { leg }
 	
-	pigment { color rgb<100/255,1,231/255> }
+	object {
+	    leg
+		scale <-1,0,0>
+	}
+
+	texture {
+		pigment { color rgb<90/255,230/255,1> }
+		finish { specular 1 roughness 0.007 }
+	}
 }
 
 // ===== GREY OBJECTS =====
