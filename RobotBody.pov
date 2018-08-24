@@ -30,17 +30,10 @@ texture {
 }
 
 camera {
-	location <3,6,-10>
+	location <3,9,-10>
 	look_at <0,4,0>
 	up <0,1,0>
 	right<1,0,0>
-}
-
-light_source { 
-	<1,7,-8> 
-	color rgb<1,1,1>
-	//area_light <5, 0, 0> <0, 5, 0> 5 5
-	 
 }   
 
 // ===== COLOURED OBJECTS =====

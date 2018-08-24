@@ -1,0 +1,12 @@
+#include "textures.inc"
+
+camera {
+	<0,0,-5>
+	look_at <0,0,0>
+}
+
+sphere {
+	{0,0,0}
+	1
+	texture { Brushed_Aluminium }
+}

@@ -1,7 +1,36 @@
 #declare GreyMetal = texture { pigment { rgb <0.2,0.2,0.2> } };
 
+#declare BluePlastic = 
+texture {
+	pigment { color rgb<90/255,230/255,1> }
+	finish { specular 1 roughness 0.007 }
+}
+
+#declare ClearGlass =
+texture {
+	pigment { color rgbt 1 }
+	finish {
+		specular 1
+		roughness 0.001
+		reflection {0.5}
+	}
+}
+
+#declare Aluminium =
+texture {
+	pigment { color rgb<0.8,0.8,0.8> }
+	finish {
+		specular 0.5
+		roughness 0.05
+		metallic
+		brilliance 5
+		diffuse 0.6
+		reflection {0.2}
+	}
+}
+
 camera {
-	location <3,6.5,-10>
+	location <3,6,-10>
 	look_at <0,4,0>
 	up <0,1,0>
 	right<1,0,0>
@@ -15,6 +44,7 @@ light_source {
 }   
 
 // ===== COLOURED OBJECTS =====
+#declare body = 
 union {
 	// Top torso section
 	difference {
@@ -107,6 +137,20 @@ union {
 			}
 		}
 		
+		// Left upper arm connector
+		box {
+			<1,4.75,0.25>
+			<1.1,6.5,-0.25>
+			texture { GreyMetal }
+		}
+		
+		// Left lower arm connector
+		box {
+			<1,4.75,0.25>
+			<1.1,4,-0.25>
+			texture { GreyMetal }
+		}
+		
 		// Left elbow
 		cylinder {
 			<0.95,4.75,0>
@@ -126,6 +170,32 @@ union {
 				<1.2,4.75,0>
 				0.45
 			}
+			
+			cylinder {
+				<0.9,3.1,0>
+				<1.2,3.1,0>
+				0.5
+			}
+		}
+		
+		// Left hand
+		difference {
+			cylinder {
+				<0.9,3.1,0>
+				<1.2,3.1,0>
+				0.4
+			}
+			
+			cylinder {
+				<0.89,3.1,0>
+				<1.21,3.1,0>
+				0.25
+			}
+			
+			box {
+				<0.89,3.1,0.1>
+				<1.21,2,-0.1>
+			}
 		}
 	}
 
@@ -137,42 +207,6 @@ union {
 		arm
 		scale <-1,1,1>
 	}
-	/*
-	// Right upper arm
-	difference {
-		box {
-			<-0.95,6,0.3>
-			<-1.15,4.75,-0.3>
-		}
-		
-		cylinder {
-			<-0.9,4.75,0>
-			<-1.2,4.75,0>
-			0.45
-		}
-	}
-	
-	// Right elbow
-	cylinder {
-		<-0.95,4.75,0>
-		<-1.15,4.75,0>
-		0.3
-	}
-	
-	// Right lower arm
-	difference {
-		box {
-			<-0.95,4.75,0.3>
-			<-1.15,3.5,-0.3>
-		}
-		
-		cylinder {
-			<-0.9,4.75,0>
-			<-1.2,4.75,0>
-			0.45
-		}
-	}
-	*/
 
 	// Middle torso section 
 	difference
@@ -260,7 +294,7 @@ union {
 		difference {
 			box {
 				<0.7,3.45,0.4>
-				<0.3,1.95,-0.4>
+				<0.3,1.7,-0.4>
 			}
 			
 			cylinder {
@@ -312,6 +346,7 @@ union {
 		sphere {
 			<0.5,0.45,0>
 			0.2
+			texture { GreyMetal }
 		}
 
 		// Foot claw
@@ -381,44 +416,211 @@ union {
 	    leg
 		scale <-1,0,0>
 	}
+	
+	// ===== GREY OBJECTS =====
 
-	texture {
-		pigment { color rgb<90/255,230/255,1> }
-		finish { specular 1 roughness 0.007 }
+	union {
+		
+		// Upper torso shaft
+		difference {
+			cylinder {
+				<-1,6.5,0>,
+				<1,6.5,0>,
+				0.44
+			}
+		}
+		
+		// Head receptacle
+		cylinder {
+			<0,6.5,0>
+			<0,7,0>
+			0.4
+		} 
+		
+		// Right upper arm connector
+		box {
+			<-1,4,0.25>
+			<-1.1,6.5,-0.25>
+		}
+		
+		// Leg shaft
+		cylinder {
+			<-0.5,3.45,0>,
+			<0.5,3.45,0>,
+			0.1
+		}
+		
+		texture { GreyMetal }
 	}
+	
+	texture { BluePlastic }
 }
 
-// ===== GREY OBJECTS =====
+object { body }
 
+// ===== HEAD =====
+#declare head =
 union {
+	// Main unit
+	difference {
+		
+		// Shell
+		superellipsoid {
+			<0.5,0.15>
+			scale <0.7,0.45,0.7>
+		}
+		
+		// Inner section
+		superellipsoid {
+			<0.65,0.15>
+			scale <0.6,0.4,0.6>
+		}
+		
+		// Octagonal cutout
+		intersection {
+			box {
+				<0.45,0.45,-1>
+				<-0.45,-0.45,0>
+			}
+			
+			box {
+				<0.45,0.45,-1>
+				<-0.45,-0.45,0>
+				rotate <0,0,45>
+			}
+			
+			scale<1.2,0.7,1>
+		}
+		
+		// Strips
+		box {
+			<0.45,1,1>
+			<0.4,-1,-1>
+		}
 	
-	// Upper torso shaft
+		box {
+			<-0.45,1,1>
+			<-0.4,-1,-1>
+		}
+	}
+	
+	// Head interior
+	superellipsoid {
+		<0.65,0.25>
+		scale <0.55,0.4,0.55>
+		texture { GreyMetal }
+	}
+	
+	// Mouth section
+	difference {
+		superellipsoid {
+			<0.5,0.25>
+			scale <0.45,0.15,0.4>
+			texture { Aluminium }
+		}
+		
+		box {
+			<0.25, 0.05, -1>
+			<-0.25, 0.03, 0>
+		}
+		
+		box {
+			<0.25, 0.01, -1>
+			<-0.25, -0.01, 0>
+		}
+		
+		box {
+			<0.25, -0.03, -1>
+			<-0.25, -0.05, 0>
+		}
+		
+		translate <0,-0.5,-0.35>
+	}
+	
+	#declare facelight =
+	union {
+		cylinder {
+			<0,0,-0.57>
+			<0,0,-0.53>
+			0.25
+			texture { pigment { color rgb<0,0,0> } }
+		}
+		
+		sphere {
+			<0,0,-0.6>
+			0.25
+			texture { ClearGlass }
+			interior { 
+				ior 1.5
+			}
+		}
+			
+		light_source {
+			<0,0,-0.6>
+			color rgb<0.5*clock,0.5*clock,1*clock>
+			looks_like {
+				sphere {
+					<0,0,0>
+					0.07
+					texture { 
+						pigment { color rgb <1*clock,1*clock,1*clock> }
+						finish { ambient rgb <0.5*clock,0.5*clock,1*clock> }
+					}
+				}
+			}			
+		}
+	}
+	
 	cylinder {
-		<-1,6.5,0>,
-		<1,6.5,0>,
-		0.44
-	} 
-	
-	// Left upper arm connector
-	box {
-		<1,4,0.25>
-		<1.1,6.5,-0.25>
+		<0,0,0>
+		<0,-0.8,0>
+		0.3
+		texture { GreyMetal }
 	}
 	
-	// Right upper arm connector
-	box {
-		<-1,4,0.25>
-		<-1.1,6.5,-0.25>
+	cone {
+		<0,-0.8,0>
+		0.3
+		<0,-1.1,0>
+		0.15
+		texture { GreyMetal }
+	}
+    
+    difference {
+		cylinder {
+			<0,-1.1,0>
+			<0,-1.6,0>
+			0.12
+		}
+		
+		box {
+			<-0.04,-1.2,1>
+			<0.04,-1.7,-1>
+		}
+		
+		texture { 
+			Aluminium
+			pigment { color rgb<1,0.8,0> } 
+		}
 	}
 	
-	// Leg shaft
-	cylinder {
-		<-0.5,3.45,0>,
-		<0.5,3.45,0>,
-		0.1
+	object { facelight }
+	
+	object {
+		facelight
+		scale <0.5,0.5,0.5>
+		translate <-0.37,0,-0.27>
 	}
 	
-	texture {
-		pigment { color rgb<0.2,0.2,0.2> }
+	object {
+		facelight
+		scale <0.5,0.5,0.5>
+		translate <0.37,0,-0.27>
 	}
+	
+	translate <0,7.8,0>
+		
+	texture { BluePlastic }
 }
+
+object { head }
