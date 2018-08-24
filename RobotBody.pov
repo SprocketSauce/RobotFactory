@@ -449,7 +449,7 @@ union {
 	texture { BluePlastic }
 }
 
-object { body }
+//object { body }
 
 // ===== HEAD =====
 #declare head =
