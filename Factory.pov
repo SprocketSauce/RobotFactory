@@ -14,6 +14,20 @@ light_source {
 	point_at <0,0,30>
 }
 
+light_source {
+	<5,20,55>
+	color rgb<1,1,1>
+	spotlight
+	point_at <0,0,60>
+}
+
+light_source {
+	<5,20,85>
+	color rgb<1,1,1>
+	spotlight
+	point_at <0,0,90>
+}
+
 /*light_source { 
 	<1,7,-8> 
 	color rgb<1,1,1>
