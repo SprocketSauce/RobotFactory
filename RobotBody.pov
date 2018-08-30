@@ -407,7 +407,7 @@ union {
 	
 	object {
 	    leg
-		scale <-1,0,0>
+		scale <-1,1,1>
 	}
 	
 	// ===== GREY OBJECTS =====
@@ -547,7 +547,9 @@ union {
 				ior 1.5
 			}
 		}
-			
+		
+		#local l = min(max(clock*3-1,0),1);
+
 		light_source {
 			<0,0,-0.6>
 			color rgb<0.5*clock,0.5*clock,1*clock>
@@ -556,8 +558,8 @@ union {
 					<0,0,0>
 					0.07
 					texture { 
-						pigment { color rgb <1*clock,1*clock,1*clock> }
-						finish { ambient rgb <0.5*clock,0.5*clock,1*clock> }
+						pigment { color rgb <1*l,1*l,1*l> }
+						finish { ambient rgb <0.5*l,0.5*l,1*l> }
 					}
 				}
 			}			
@@ -615,5 +617,3 @@ union {
 		
 	texture { BluePlastic }
 }
-
-object { head }
