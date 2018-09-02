@@ -29,6 +29,8 @@ texture {
 	}
 }
 
+#declare l = min(max(clock*3-1,0),1);
+
 camera {
 	location <3,9,-10>
 	look_at <0,4,0>
@@ -37,7 +39,7 @@ camera {
 }   
 
 // ===== COLOURED OBJECTS =====
-#declare body = 
+#declare StaticBody = 
 union {
 	// Top torso section
 	difference {
@@ -137,58 +139,11 @@ union {
 			texture { GreyMetal }
 		}
 		
-		// Left lower arm connector
-		box {
-			<1,4.75,0.25>
-			<1.1,4,-0.25>
-			texture { GreyMetal }
-		}
-		
 		// Left elbow
 		cylinder {
 			<0.95,4.75,0>
 			<1.15,4.75,0>
 			0.3
-		}
-		
-		// Left lower arm
-		difference {
-			box {
-				<0.95,4.75,0.3>
-				<1.15,3.5,-0.3>
-			}
-			
-			cylinder {
-				<0.9,4.75,0>
-				<1.2,4.75,0>
-				0.45
-			}
-			
-			cylinder {
-				<0.9,3.1,0>
-				<1.2,3.1,0>
-				0.5
-			}
-		}
-		
-		// Left hand
-		difference {
-			cylinder {
-				<0.9,3.1,0>
-				<1.2,3.1,0>
-				0.4
-			}
-			
-			cylinder {
-				<0.89,3.1,0>
-				<1.21,3.1,0>
-				0.25
-			}
-			
-			box {
-				<0.89,3.1,0.1>
-				<1.21,2,-0.1>
-			}
 		}
 	}
 
@@ -428,12 +383,6 @@ union {
 			<0,6.5,0>
 			<0,7,0>
 			0.4
-		} 
-		
-		// Right upper arm connector
-		box {
-			<-1,4,0.25>
-			<-1.1,6.5,-0.25>
 		}
 		
 		// Leg shaft
@@ -449,7 +398,88 @@ union {
 	texture { BluePlastic }
 }
 
-//object { body }
+// Animated Lower arm
+#declare LowerArm =
+union {
+	// Left lower arm connector
+	box {
+		<1,4.75,0.25>
+		<1.1,4,-0.25>
+		texture { GreyMetal }
+	}
+			
+	// Left lower arm
+	difference {
+		box {
+			<0.95,4.75,0.3>
+			<1.15,3.5,-0.3>
+		}
+		
+		cylinder {
+			<0.9,4.75,0>
+			<1.2,4.75,0>
+			0.45
+		}
+		
+		cylinder {
+			<0.9,3.1,0>
+			<1.2,3.1,0>
+			0.5
+		}
+	}
+			
+	// Left hand
+	difference {
+		cylinder {
+			<0.9,3.1,0>
+			<1.2,3.1,0>
+			0.4
+		}
+				
+		cylinder {
+			<0.89,3.1,0>
+			<1.21,3.1,0>
+			0.25
+		}
+		
+		box {
+			<0.89,3.1,0.1>
+			<1.21,2,-0.1>
+		}
+	}
+	
+	texture { BluePlastic }
+}
+
+#declare AnimatedArm =
+object {
+	LowerArm
+	translate <0,-4.75,0>
+	rotate <90*l,0,0>
+	translate <0,4.75,0>
+}
+		
+#declare Body =
+union
+{
+	object { StaticBody }
+	object { LowerArm }
+	object { 
+		LowerArm 
+		scale <-1,1,1> 
+	}
+}
+
+#declare AnimatedBody =
+union
+{
+	object { StaticBody }
+	object { AnimatedArm }
+	object { 
+		AnimatedArm 
+		scale <-1,1,1> 
+	}
+}
 
 // ===== HEAD =====
 #declare head =
@@ -547,12 +577,10 @@ union {
 				ior 1.5
 			}
 		}
-		
-		#local l = min(max(clock*3-1,0),1);
 
 		light_source {
 			<0,0,-0.6>
-			color rgb<0.5*clock,0.5*clock,1*clock>
+			color rgb<0.5*l,0.5*l,1*l>
 			looks_like {
 				sphere {
 					<0,0,0>

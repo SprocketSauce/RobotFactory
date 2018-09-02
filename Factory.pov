@@ -1,5 +1,6 @@
 #include "RobotBody.pov"
 
+// Spotlights
 light_source {
 	<2,20,-5>
 	color rgb<1,1,1>
@@ -33,6 +34,12 @@ light_source {
 	color rgb<1,1,1>
 	spotlight
 	point_at <0,10,115>
+}
+
+// Previous room light
+light_source {
+	<0,11.7,120>
+	color rgb<0,0.25,0.5>
 }
 
 #declare Concrete =
@@ -69,16 +76,7 @@ texture {
 	}
 }
 
-/*light_source { 
-	<1,7,-8> 
-	color rgb<1,1,1>
-}
-
-light_source {
-	<1,7,22>
-	color rgb<1,1,1>
-}*/
-
+// Conveyor Belt
 #declare BeltSegment =
 difference {
 	union {
@@ -171,59 +169,61 @@ union {
 		TwentySevenSegments
 		translate <0,0,113.4>
 	}
-
+    
+    scale <1,1,1.1905>
 	translate <0,0,min(0,-30*clock+20)>
 }
 
+// Robots
 union {
-	object { body }
+	object { AnimatedBody }
 	
 	object { 
-		body
+		Body
 		translate <0,0,10>
 	}
 	object { 
-		body
+		Body
 		translate <0,0,20>
 	}
 	object { 
-		body
+		Body
 		translate <0,0,30>
 	}
 	object { 
-		body
+		Body
 		translate <0,0,40>
 	}
 	object { 
-		body
+		Body
 		translate <0,0,50>
 	}
 	object { 
-		body
+		Body
 		translate <0,0,60>
 	}
 	object { 
-		body
+		Body
 		translate <0,0,70>
 	}
 	object { 
-		body
+		Body
 		translate <0,0,80>
 	}
 	object { 
-		body
+		Body
 		translate <0,0,90>
 	}
 	object { 
-		body
+		Body
 		translate <0,0,100>
 	}
 	object {
-		body
+		Body
 		translate <0,0,110>
 	}
 	object {
-		body
+		Body
 		translate <0,0,120>
 	}
 
@@ -387,6 +387,7 @@ difference
 	}
 }
 
+// Sliding doors
 #declare door =
 superellipsoid {
 	<0.05,1>
